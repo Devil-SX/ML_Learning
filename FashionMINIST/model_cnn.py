@@ -1,9 +1,4 @@
-from pathlib import Path
 from torch import nn
-from cli import CLI
-
-model_dir = Path("model")
-model_name = "cnn"
 
 
 class LeNet(nn.Module):
@@ -35,8 +30,3 @@ class LeNet(nn.Module):
         x = self.flatten(x)
         logits = self.cnn(x)
         return logits
-
-
-if __name__ == "__main__":
-    cli = CLI()
-    cli.start_training(LeNet, model_name, model_dir)

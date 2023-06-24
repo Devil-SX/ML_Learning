@@ -1,46 +1,43 @@
-
 import argparse
-import torch
-from torch import nn
-import time
-from check_device import device
-from utils import train, test
-from dataset import train_dataloader, test_dataloader
+from pathlib import Path
 
-class CLI:
-    def __init__(self):
-        parser = argparse.ArgumentParser()
-        parser.add_argument("--epochs", type=int, default=5, help="number of epochs")
-        parser.add_argument("--load", action="store_true", help="load the model from last checkpoint")
-        self.args = parser.parse_args()
+from model_cnn import LeNet
+from model_mlp import Multilayer
+from torchtool.utils import start_training
 
 
-    def start_training(self, model_class, model_name, model_dir):
-        model = model_class().to(device)
-        if self.args.load:
-            model.load_state_dict(torch.load(model_dir / f"{model_name}.pth"))
-            print("Load model from last checkpoint.")
+# Define CLI interfaces
+parser = argparse.ArgumentParser()
+parser.add_argument("--epochs", type=int, default=5, help="number of epochs")
+parser.add_argument(
+    "--load", action="store_true", help="load the model from last checkpoint"
+)
+parser.add_argument(
+    "--model", type=str, default="mlp", choices=["mlp", "cnn"], help="mlp or cnn"
+)
+args = parser.parse_args()
 
 
-        loss = nn.CrossEntropyLoss()
-        optimizer = torch.optim.SGD(model.parameters(), lr=1e-3)
-
-        # Start Training
-        epochs = self.args.epochs
-        time_all = 0
-        start = time.perf_counter()
-        for t in range(epochs):
-            print(f"Epoch {t+1}/{epochs}\n-------------------------------")
-            train(train_dataloader, model, loss, optimizer)
-            test(test_dataloader, model, loss)
-        print("Done!")
-        time_all = time.perf_counter() - start
-        print(f"Training time: {time_all:.2f}s")
+# Get parameters
+epochs = args.epochs
+load = args.load
+model_name = args.model
+model_dir = Path("./model")
+model_path = model_dir / f"{model_name}.pth"
 
 
-        # Save Model
-        if not model_dir.is_dir():
-            model_dir.mkdir()
+# Check path
+if not model_dir.is_dir():
+    model_dir.mkdir()
 
-        torch.save(model.state_dict(), model_dir / f"{model_name}.pth")
-        print(f"Saved PyTorch Model State to {model_name}.pth")
+
+# Initial model class
+model_class = (Multilayer
+         if model_name == "mlp"
+         else LeNet
+         if model_name == "cnn"
+         else None)
+
+
+# Start Training
+start_training(model_class,model_path,load,epochs)

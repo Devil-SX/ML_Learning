@@ -1,8 +1,8 @@
+from pathlib import Path
+
 from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision.transforms import ToTensor
-from pathlib import Path
-
 
 dataset_dir = Path("../data")
 

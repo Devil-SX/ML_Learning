@@ -1,9 +1,4 @@
-from pathlib import Path
 from torch import nn
-from cli import CLI
-
-model_dir = Path("model")
-model_name = "mlp"
 
 
 class Multilayer(nn.Module):
@@ -23,8 +18,3 @@ class Multilayer(nn.Module):
         x = self.flatten(x)
         logits = self.linear_relu_stack(x)
         return logits
-
-
-if __name__ == "__main__":
-    cli = CLI()
-    cli.start_training(Multilayer, model_name, model_dir)
