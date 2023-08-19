@@ -2,5 +2,11 @@
 Pytorch Learning
 </h1>
 
-- [Get Started](./mlp) Start Learning Pytorch
-- [FashionMNIST](./FashionMINIST/README.md) training MLP and CNN on FashionMNIST dataset. Implement a basic interface of Pytorch training.
+This repository documents and preserves my journey of learning machine learning programming
+
+| Project| Models| Dataset/Situation|Description|
+|---|---|---|---|
+|[Get Started](./mlp) |MLP | | Start Learning Pytorch|
+|[FashionMNIST](./FashionMINIST/README.md)|MLP CNN|FashionMNIST|Implement a basic interface of Pytorch training|
+
+

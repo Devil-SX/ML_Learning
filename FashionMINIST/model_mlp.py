@@ -7,10 +7,13 @@ class Multilayer(nn.Module):
         self.flatten = nn.Flatten()
         self.linear_relu_stack = nn.Sequential(
             nn.Linear(28 * 28, 512),
+            nn.BatchNorm1d(512),
             nn.ReLU(),
             nn.Linear(512, 512),
+            nn.BatchNorm1d(512),
             nn.ReLU(),
             nn.Linear(512, 10),
+            nn.BatchNorm1d(10),
             nn.ReLU(),
         )
 

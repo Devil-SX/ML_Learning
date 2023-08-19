@@ -1,9 +1,11 @@
+#!python
 import argparse
 from pathlib import Path
 
 from model_cnn import LeNet
 from model_mlp import Multilayer
 from torchtool.utils import start_training
+from torchtool.MlAgent import MlAgent
 
 
 # Define CLI interfaces
@@ -18,18 +20,15 @@ parser.add_argument(
 args = parser.parse_args()
 
 
+agent = MlAgent()
+
 # Get parameters
-epochs = args.epochs
-load = args.load
 model_name = args.model
+
+agent.epochs = args.epochs
+agent.load = args.load
 model_dir = Path("./model")
-model_path = model_dir / f"{model_name}.pth"
-
-
-# Check path
-if not model_dir.is_dir():
-    model_dir.mkdir()
-
+agent.checkpoint_path = model_dir / f"{model_name}.pth"
 
 # Initial model class
 model_class = (Multilayer
@@ -37,7 +36,13 @@ model_class = (Multilayer
          else LeNet
          if model_name == "cnn"
          else None)
+agent.model_class = model_class
+
+
+# Check path
+if not model_dir.is_dir():
+    model_dir.mkdir()
 
 
 # Start Training
-start_training(model_class,model_path,load,epochs)
+agent.start_training()
