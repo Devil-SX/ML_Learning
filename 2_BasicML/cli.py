@@ -4,7 +4,6 @@ from pathlib import Path
 
 from model_cnn import LeNet
 from model_mlp import Multilayer
-from torchtool.utils import start_training
 from torchtool.MlAgent import MlAgent
 
 

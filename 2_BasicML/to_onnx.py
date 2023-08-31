@@ -3,8 +3,8 @@ from pathlib import Path
 
 import torch
 
-from FashionMINIST.model_cnn import LeNet
-from FashionMINIST.model_mlp import Multilayer
+from model_cnn import LeNet
+from model_mlp import Multilayer
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', type=str, default='mlp', choices=["mlp","cnn"],help='mlp or cnn')

@@ -1,8 +1,8 @@
 import torch
 from model_mlp import Multilayer
 
-from FashionMINIST.torchtool.check_device import device
-from FashionMINIST.torchtool.dataset import test_dataset
+from torchtool.check_device import device
+from torchtool.dataset import test_dataset
 
 model = Multilayer().to(device)
 model.load_state_dict(torch.load("model/mlp.pth"))

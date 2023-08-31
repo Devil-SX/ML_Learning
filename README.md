@@ -4,9 +4,8 @@ Pytorch Learning
 
 This repository documents and preserves my journey of learning machine learning programming
 
-| Project| Models| Dataset/Situation|Description|
-|---|---|---|---|
-|[Get Started](./mlp) |MLP | | Start Learning Pytorch|
-|[FashionMNIST](./FashionMINIST/README.md)|MLP CNN|FashionMNIST|Implement a basic interface of Pytorch training|
 
-
+- [FirstML](./1_FirstML)  Start Learning Pytorch
+- [BasicML](./2_BasicML/README.md) MLP & CNN 
+- [RL](./3_RL/) Reinforcement Learning
+- [ObjectDectection]
